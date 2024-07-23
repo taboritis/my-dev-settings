@@ -2,9 +2,9 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
@@ -106,21 +106,12 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-source ~/.zsh_aliases
-source ~/.zsh_functions
-
-arm() {
-  arch -x86_64 $@
-}
+source ~/Projects/my-dev-settings/mini/zsh/.zsh_aliases
+source ~/Projects/my-dev-settings/mini/zsh/.zsh_functions
 
 export PATH="./vendor/bin/:$PATH"
-export PATH="/Users/taboritis/.npm-global/bin/:$PATH"
 
 source /Users/taboritis/.docker/init-zsh.sh || true # Added by Docker Desktop
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 export K9SCONFIG=$HOME/.config/k9s
 export XDG_CONFIG_HOME=$HOME/.configexport PATH="/opt/homebrew/opt/libpq/bin:$PATH"
