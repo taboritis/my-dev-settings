@@ -118,6 +118,8 @@ export PATH="/Users/taboritis/.npm-global/bin/:$PATH"
 
 source /Users/taboritis/.docker/init-zsh.sh || true # Added by Docker Desktop
 
+export HOMEBREW_GITHUB_API_TOKEN=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
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
