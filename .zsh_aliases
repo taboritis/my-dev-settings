@@ -1,0 +1,231 @@
+#!bin/sh
+
+alias as="cd ~/Projects"
+alias please="sudo"
+alias hosts="sudo vi /etc/hosts"
+alias phpini='nvim /usr/local/etc/php'
+alias pv='php -v'
+alias xd='cp /usr/local/etc/php/8.1/conf.d/ext-xdebug.ini.on.example /usr/local/etc/php/8.1/conf.d/ext-xdebug.ini && php -v'
+alias xdf='cp /usr/local/etc/php/8.1/conf.d/ext-xdebug.ini.off.example /usr/local/etc/php/8.1/conf.d/ext-xdebug.ini && php -v'
+alias sshc='nvim ~/.ssh/config'
+alias newip='sudo sh ~/Devtools/update_merito_ip.sh'
+
+# Apps
+alias laravel='~/.composer/vendor/bin/laravel'
+alias valet='~/.composer/vendor/bin/valet'
+alias jenkins='cd ~/.jenkins/workspace'
+alias sq='mysql -uroot'
+alias cda='composer dump-autoload'
+alias aliases="nvim ~/.zsh_aliases"
+alias functions="nvim ~/.zsh_functions"
+alias zs="nvim ~/.zshrc"
+alias zsr="source ~/.zshrc"
+alias mini='ssh pslab@192.168.100.3'
+alias mba='ssh agusia@192.168.100.23'
+alias agusia='ssh agusia@192.168.100.23'
+alias sss='sudo shutdown -s now'
+alias ssr='sudo shutdown -s now'
+alias cat="bat"
+alias vim="nvim"
+alias vi="nvim"
+alias v="nvim"
+alias vv="nvim"
+
+# Git
+alias g="lazygit"
+alias gs="git status"
+alias gss="git status && git log --graph --oneline --decorate --all 10"
+alias gm="git checkout master"
+alias gam="git commit --amend"
+alias gdd="git --no-pager log --graph --oneline --decorate --all -10"
+alias gddd="git log --pretty=format:'%C(yellow)%h %C(cyan)%ad %C(magenta)| %C(blue)%an %C(reset)| %s' --date=short $*"
+alias gl="git log"
+alias gaa="git add . && git add -A"
+alias grc="git rebase --continue"
+alias gb="git checkout"
+alias gbb="git checkout -b"
+alias gc="git commit"
+alias gcm="git add . && git commit -m"
+alias bra="git branch -a"
+alias brad="git branch -r -d"
+alias brd="git branch -D"
+alias gri='git rebase -i'
+alias gpt='git push && git push --tags'
+alias gpp='git push && git push --tags && git push backup'
+alias wii='commit'
+alias wip='git add -A && git commit --no-verify -m WIP'
+alias gp="git push"
+alias gpf="git push --force"
+alias gfo="git fetch origin"
+alias gpa="(git checkout main && git push && git push --tags) || (git checkout master && git push && git push --tags) || (git checkout develop && git push)"
+alias gpl="git pull"
+alias cl="git clone"
+alias grix="git reset --soft"
+alias grho="git reset --hard origin/$(git branch --show-current)"
+alias gpldevb='myBranch=$(git rev-parse --abbrev-ref HEAD) && git checkout develop && git pull && git fetch origin && git checkout $myBranch'
+alias gpldev='git checkout develop && git pull && git fetch origin'
+alias gplmain='git checkout main && git pull'
+alias grd="git rebase develop"
+alias gstat="git diff --shortstat $1 $2"
+alias gdev="git switch develop"
+
+# Git flow
+alias gfs='git flow feature start'
+alias gfp='git flow feature publish'
+alias gff='git flow feature finish'
+alias gffs='git flow feature finish -S'
+alias gbs='git flow bugfix start'
+alias gbp='git flow bugfix publish'
+alias gbf='git flow bugfix finish'
+alias grs='git flow release start'
+alias grp='git flow release publish'
+alias grf='git flow release finish'
+alias ghs='git flow hotfix start'
+alias ghp='git flow hotfix publish'
+alias ghf='git flow hotfix finish'
+
+# Fav locations
+alias ssh-hostido='ssh host110735@host110735.hostido.net.pl -p64321'
+
+# Artisan
+alias art="php artisan"
+alias ads="php artisan dump-server"
+alias arl="php artisan route:list"
+alias mig="php artisan migrate:fresh"
+alias migs="php artisan migrate:fresh --seed"
+alias migsa="php artisan migrate:all && php artisan queue:work --tries=3 --stop-when-empty"
+alias roll="php artisan migrate:rollback"
+alias att="php artisan tinker"
+alias ccc="php artisan cache:clear \
+    && php artisan view:clear \
+    && php artisan config:clear \
+    && php artisan route:clear \
+    && rm -f storage/logs/*.log \
+    && find -mindepth 1 -maxdepth 1 -type d -exec rm -r {}";
+alias tt="php artisan test"
+alias attt="php artisan test:me"
+
+
+# Symfony
+# alias cs=" php ./bin/console"
+# alias csaw="php ./bin/console debug:autowiring"
+# alias csmm="php ./bin/console make:migration"
+# alias csmigrate="php ./bin/console doctrine:migrations:migrate"
+# alias csmg="php ./bin/console doctrine:migrations:generate"
+# alias csmigs="php ./bin/console doctrine:database:drop -f \
+#     && php ./bin/console make:migration -n \
+#     && php ./bin/console doctrine:migrations:migrate -n \
+#     && php ./bin/console doctrine:fixtures:load -n"
+
+# Sail
+alias sd="sail up -d"
+alias sdd="sail down"
+alias smigs="sail artisan migrate:fresh --seed"
+alias ssa="sail artisan"
+
+# Queues
+alias qws="php artisan queue:work --tries=1 --stop-when-empty"
+alias sqws="sail artisan queue:work --tries=1 --stop-when-empty"
+alias qww="php artisan queue:work --tries=3"
+alias qwda="php artisan queue:flush"
+
+# Node section
+alias dev="npm run dev"
+
+# Servers  aliases
+alias vo="valet open"
+
+# PhpUnit
+alias p="./vendor/bin/phpunit --exclude-group=slow $*"
+alias pp="./vendor/bin/phpunit --testdox"
+alias pl="./vendor/bin/phpunit --filter"
+#Phpstan
+alias psa='phpstan analyse'
+#CodeSniffer
+alias css='./vendor/bin/phpcs'
+alias csf='./vendor/bin/phpcbf'
+#Cypress
+alias cy='npx cypress open'
+alias cyr='npx cypress run'
+
+# Docker
+alias da='docker ps -a'
+alias di='docker images'
+alias dip='docker image prune'
+alias dfa='docker stop $(docker ps -a -q) || true && docker rm $(docker ps -a -q) && docker volume prune -f && docker network prune -f && docker system prune -a'
+alias dsa='docker rm $(docker ps -qa)'
+alias drt='docker run -tid'
+alias dre='docker volume prune -f &&d docker network prune -f'
+alias drem='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker volume prune -f &&d docker network prune -f'
+alias dup='docker-compose up'
+alias dupd='docker-compose up -d'
+alias de='docker exec -ti'
+alias dc='docker-compose'
+alias dcc='docker-compose up -d --build'
+alias dv='docker volume'
+alias dvp='docker volume prune'
+alias dvl='docker volume ls'
+alias dn='docker network'
+alias dnp='docker network prune -f'
+alias dnl='docker network ls'
+
+#APPS
+alias buu='brew update && brew upgrade'
+
+# KUBERNETES
+alias k='kubectl'
+alias kdev='kubectl --context kubernetes-admin@kubernetes'
+alias kuat='kubectl --context kubernetes-admin-uat@kubernetes-uat'
+alias ktest='kubectl --context kubernetes-admin-test-ex30@kubernetes-test-ex30'
+alias kprod='kubectl --context kubernetes-admin-preprod@kubernetes-preprod'
+alias kk='k9s'
+
+#HELM
+alias hdev='helm --kube-context kubernetes-admin@kubernetes'
+alias huat='helm --kube-context kubernetes-admin-uat@kubernetes-uat'
+alias htest='helm --kube-context kubernetes-admin-test-ex30@kubernetes-test-ex30'
+alias hprod='helm --kube-context kubernetes-admin-preprod@kubernetes-preprod'
+
+#VARIA
+alias play='spotify play $*'
+alias f='fork .'
+alias der="deptrac analyse --report-uncovered"
+alias de="deptrac analyse"
+alias qa='docker run -it -v $PWD:/app -w /app jakzal/phpqa bash'
+alias j='open "https://helpdesk.teb-akademia.pl/secure/RapidBoard.jspa?rapidView=298"'
+
+#SSH
+alias ssh218="ssh -i ~/.ssh/id_teb pskrobol@192.168.194.218"
+alias ssh218="ssh -i ~/.ssh/id_teb pskrobol@192.168.194.218"
+
+#Python
+alias python=python3
+
+# Jest
+alias jest="yarn jest || npm run jest"
+
+#BASH
+alias copyipaddress="ifconfig | grep -oEi '10\.212\.[0-9.]{5,7}' | head -1 | pbcopy"
+
+# NUXT
+alias fl="yarn lint:fix"
+# alias cyrr='npx cypress run --record --key b430ef27-3f60-43f9-bf29-adfb4e4b9114'
+
+
+alias ff="fzf"
+alias cd="z"
+alias c="zi"
+alias vs="vsplit_tab"
+alias hs="split_tab"
+
+alias t="tmux"
+alias tls="tmux ls"
+alias tn="tmux new -s"
+alias ta="tmux attach"
+alias tas="tmux attach -t"
+
+
+alias mailpit="docker rm -f mailpit || true && docker run -d --restart unless-stopped --name=mailpit -p 8025:8025 -p 1025:1025 axllent/mailpit"
+alias redis="docker run -d -p 6379:6379 --name redis redis"
+
+alias q='exit'

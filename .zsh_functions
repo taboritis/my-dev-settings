@@ -1,0 +1,176 @@
+#!/bin/bash
+
+# Docker
+function dexec() {
+   docker exec -it "$@" bash
+}
+
+function drun() {
+   docker exec -it "$@" bash
+}
+
+# Create a new directory and enter it
+function mkd() {
+   mkdir -p "$@" && cd "$@"
+}
+
+function tinker()
+{
+  if [ -z "$1" ]
+    then
+       php artisan tinker
+    else
+       php artisan tinker --execute="dd($1);"
+  fi
+}
+
+#shortcut voor zhs quick-look command
+function ql() {
+   quick-look "$1"
+}
+
+archive () {
+   zip -r "$1".zip -i "$1" ;
+}
+
+function removehost() {
+   ssh-keygen -R "$1"
+}
+
+function we() {
+   city="$1"
+
+   if [ -z "$city" ]; then
+      city="Łaziska%20Górne"
+   fi
+
+   eval "curl http://wttr.in/${city}"
+}
+
+alias mysqladm='mysql -u root'
+
+# Scrape a single webpage with all assets
+
+function rector() {
+   docker run -v $(pwd):/project rector/rector:latest process /project/$1 --set php80 --autoload-file /project/vendor/autoload.php 
+}
+
+
+#  Commit everything
+function commit() {
+   commitMessage="$*"
+
+   git add .
+
+   if [ "$commitMessage" = "" ]; then
+      aicommits
+      return
+   fi
+ 
+   eval "git commit -a -m '${commitMessage}'"
+}
+
+function scheduler () {
+    while :; do
+        php artisan schedule:run
+	echo "Sleeping 60 seconds..."
+        sleep 60
+    done
+}
+
+function silent() {
+   "$@" >& /dev/null
+}
+
+function klogs() {
+   env="$1"
+   pod="$2"
+
+   if [ "$env" = "prod" ] ; then
+      context="kubernetes-admin-preprod@kubernetes-preprod"
+   elif [ "$env" = "uat" ] ; then
+      context="kubernetes-admin-uat@kubernetes-uat"
+   elif [ "$env" = "test" ] ; then
+      context="kubernetes-admin-test-ex30@kubernetes-test-ex30"
+   else
+      context="kubernetes-admin@kubernetes"
+   fi
+
+   targetPath="/Users/taboritis/Downloads/logs/$env/$pod/"
+   mkd "$targetPath" || true
+   kubectl --context "$context" cp "$pod":storage/logs "$targetPath"
+}
+
+function gstat() {
+   first="$1"
+   second="$2"
+
+   if [ -z "$first" ]; then
+      first="develop"
+   fi
+
+   if [ -z "$second" ]; then
+      second="HEAD"
+   fi
+
+   git diff --shortstat "$first" "$second"
+}
+
+function asMerito() {
+     git config user.name "Piotr Skrobol"
+     git config user.email "piotr.skrobol@merito.pl"
+}
+
+function asPrivate() {
+     git config user.name "Piotr Skrobol"
+     git config user.email "taboritis@gmail.com"
+}
+
+function asTaylor() {
+     git config user.name "Taylor Otwell"
+     git config user.email "taylor@laravel.com"
+}
+
+nah () {
+    git reset --hard
+    git clean -df
+    if [ -d ".git/rebase-apply" ] || [ -d ".git/rebase-merge" ]; then
+        git rebase --abort
+    fi
+}
+
+sshext () {
+   ip="192.168.194."$1
+   ssh -i ~/.ssh/id_teb pskrobol@${ip}
+}
+
+ex3() {
+   no="$1"
+   title="$2"
+   branch="EXTRA3DEV-"${no}
+
+   if  [ title ]; then
+      branch="$branch/$title"
+   fi
+
+   git flow feature start $branch
+}
+
+
+gtags() {
+   for t in `git tag -l`; do 
+      git cat-file -p `git rev-parse $t`
+   done
+}
+
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+mx() {
+  echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|awk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
+
+}

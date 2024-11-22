@@ -1,0 +1,3 @@
+[submodule "submodules/josean"]
+	path = submodules/josean
+	url = git@github.com:josean-dev/dev-environment-files.git
