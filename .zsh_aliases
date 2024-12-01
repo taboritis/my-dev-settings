@@ -224,8 +224,13 @@ alias tn="tmux new -s"
 alias ta="tmux attach"
 alias tas="tmux attach -t"
 
-
 alias mailpit="docker rm -f mailpit || true && docker run -d --restart unless-stopped --name=mailpit -p 8025:8025 -p 1025:1025 axllent/mailpit"
 alias redis="docker run -d -p 6379:6379 --name redis redis"
 
+# k3d
+alias kkk="k3d"
+alias kkl="k3d version; k3d cluster list; k3d node list"
+
 alias q='exit'
+
+alias sclear='tmux_kill_uname_session ; clear -x'
