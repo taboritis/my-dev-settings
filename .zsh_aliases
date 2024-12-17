@@ -130,7 +130,7 @@ alias qww="php artisan queue:work --tries=3"
 alias qwda="php artisan queue:flush"
 
 # Node section
-alias dev="npm run dev"
+alias dev="[ -f yarn.lock ] && yarn dev || npm run dev"
 
 # Servers  aliases
 alias vo="valet open"
@@ -140,7 +140,7 @@ alias p="./vendor/bin/phpunit --exclude-group=slow $*"
 alias pp="./vendor/bin/phpunit --testdox"
 alias pl="./vendor/bin/phpunit --filter"
 #Phpstan
-alias psa='phpstan analyse'
+alias psa='phpstan analyse --memory-limit=512M'
 #CodeSniffer
 alias css='./vendor/bin/phpcs'
 alias csf='./vendor/bin/phpcbf'
@@ -152,7 +152,7 @@ alias cyr='npx cypress run'
 alias da='docker ps -a'
 alias di='docker images'
 alias dip='docker image prune'
-alias dfa='docker stop $(docker ps -a -q) || true && docker rm $(docker ps -a -q) && docker volume prune -f && docker network prune -f && docker system prune -a'
+alias dfa='(docker ps -a -q | xargs -r docker stop) && (docker ps -a -q | xargs -r docker rm) && docker volume prune -f && docker network prune -f && docker system prune -a -f'
 alias dsa='docker rm $(docker ps -qa)'
 alias drt='docker run -tid'
 alias dre='docker volume prune -f &&d docker network prune -f'
@@ -230,7 +230,10 @@ alias redis="docker run -d -p 6379:6379 --name redis redis"
 # k3d
 alias kkk="k3d"
 alias kkl="k3d version; k3d cluster list; k3d node list"
+alias kkm="k9s --kubeconfig ~/.kube/config_merito"
+alias kkp="k9s --kubeconfig ~/.kube/config_private"
+alias cx="kubectx"
+alias ns="kubens"
 
 alias q='exit'
 
-alias sclear='tmux_kill_uname_session ; clear -x'

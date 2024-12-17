@@ -197,3 +197,7 @@ eval "$(zoxide init zsh)"
 source ~/.zsh_openai
 
     
+
+tmux-git-autofetch() {(/Users/taboritis/.tmux/plugins/tmux-git-autofetch/git-autofetch.tmux --current &)}
+add-zsh-hook chpwd tmux-git-autofetch
+    
